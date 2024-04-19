@@ -1,0 +1,23 @@
+1) Write a Solidity Smart Contract for a Non-Fungible
+Token (NFT) called Virtual Land NFT which signifies a
+Virtual Land in Metaverse. 
+
+=> 
+
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VirtualLandNFT is ERC721, Ownable {
+    uint256 public tokenIdCounter;
+
+    constructor() ERC721("VirtualLandNFT", "VLNFT") {
+        tokenIdCounter = 0;
+    }
+
+    function mint(address to) public onlyOwner {
+        _safeMint(to, tokenIdCounter);
+        tokenIdCounter++;
+    }
+}
